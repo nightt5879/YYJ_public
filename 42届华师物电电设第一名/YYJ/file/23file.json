@@ -1,0 +1,99 @@
+{
+  "blocklyFilesUrls": [
+    "../assets/blocklyFiles/blocks/file_blocks.js",
+    "../assets/blocklyFiles/generators/file_generators.js"
+  ],
+
+   "category": {
+    "kind": "category",
+    "name": "文件",
+    "colour": "8fb5ce",
+    "icon":"./文件.png",
+    "contents": [
+      {
+        "kind": "block",
+        "blockxml": "<block type='open_file'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='filename'><block type='text'><field name='TEXT'>example.txt</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='close_file'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+       {
+        "kind": "block",
+        "blockxml": "<block type='file_read'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='file_readline'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='file_readlines'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='num'><shadow type='math_number'><field name='NUM'>1</field></shadow></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='file_GiveValue'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='BackToFirst'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='file_write'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='message'><block type='variables_get'><field name='VAR'>message</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='file_write2'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='lines'><block type='variables_get'><field name='VAR'>lines</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='open_json'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='filename'><block type='text'><field name='TEXT'>example.json</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='json_read'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='json_write'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='massage'><block type='variables_get'><field name='VAR'>massage</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='open_csv'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='filename'><block type='text'><field name='TEXT'>example.csv</field></block></value></block>"
+      },
+      {
+            "kind":"block",
+            "blockxml":"<block type='print_head'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='num'><shadow type='math_number'><field name='NUM'>5</field></shadow></value></block>"
+        },
+      {
+            "kind":"block",
+            "blockxml":"<block type='print_tail'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='num'><shadow type='math_number'><field name='NUM'>5</field></shadow></value></block>"
+        },
+      {
+        "kind": "block",
+        "blockxml": "<block type='print_describe'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+            "kind":"block",
+            "blockxml":"<block type='get_a_row'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='num'><shadow type='math_number'><field name='NUM'>1</field></shadow></value></block>"
+        },
+      {
+            "kind":"block",
+            "blockxml":"<block type='get_a_column'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='num'><shadow type='math_number'><field name='NUM'>1</field></shadow></value></block>"
+        },
+       {
+        "kind": "block",
+        "blockxml": "<block type='dropna'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value></block>"
+      },
+      {
+        "kind": "block",
+        "blockxml": "<block type='fillna'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='x'><block type='variables_get'><field name='VAR'>x</field></block></value></block>"
+      },
+     {
+            "kind": "block",
+            "blockxml": "<block type='get_directory'><value name='f'><block type='variables_get'><field name='VAR'>f</field></block></value><value name='row'><shadow type='math_number'><field name='NUM'>1</field></shadow></value><value name='column'><shadow type='math_number'><field name='NUM'>1</field></shadow></value></block>"
+          }
+    ]
+  }
+}
