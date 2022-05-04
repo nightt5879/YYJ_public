@@ -1,0 +1,86 @@
+/*******************************************************************/
+//yyj_4_11
+/*****************************************************************/
+
+#include <REGX52.h>
+#include "PWM.h"
+#include "UART.h"
+#define uint unsigned int
+#define uchar unsigned char
+
+
+//on the bottom is logic level
+sbit IN1 = P2^0;
+sbit IN2 = P2^1;
+sbit IN3 = P2^2;
+sbit IN4 = P2^3;
+//on the bottom is PWM
+sbit PWM1=P2^4;
+sbit PWM2=P2^5;
+int time;
+//on the bottom is infrared
+sbit Input_l = P2^6;
+sbit Input_r = P2^7;
+
+
+/*
+agreement:
+N1&N2:left two wheels
+N3&N4:right two wheels
++-:back
+-+:forward
+--&++:stop
+*/
+
+sbit LED = P2^0;
+
+void main()
+{
+	UART_Init();		//?????
+	while(1)
+	{
+		if(RI==1)					//????????1,??????
+		{
+			LED = 0;				//????,??????LED
+			UART_SendByte(SBUF);	//??????????
+			RI=0;					//??????0
+		}
+		
+	}
+}
+/*
+void UART_Routine() interrupt 4
+{
+	if(RI==1)					//????????1,??????
+	{
+		LED = 0;				//????,??????LED
+		UART_SendByte(SBUF);	//??????????
+		RI=0;					//??????0
+	}
+}
+*/
+
+
+ 
+
+
+//time interrupt for PWM
+void Timer0_Routine() interrupt 1
+{
+	static unsigned int T0Count;
+	TL0 = 0x66;		
+	TH0 = 0xFC;	//1ms
+	T0Count++;
+	if(T0Count >= 100) T0Count = 0;
+	if(T0Count <= 20) PWM1=PWM2=1;
+	else PWM1=PWM2=0;
+}
+
+void UART_Routine() interrupt 4
+{
+	if(RI==1)
+	{
+		UART_SendByte(1);
+		RI=0;
+	}
+}

@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\Timer.obj",
+".\Objects\UART.obj" 
+TO ".\Objects\Bluetooth" 
+PRINT(".\Listings\Bluetooth.m51") RAMSIZE(256) 

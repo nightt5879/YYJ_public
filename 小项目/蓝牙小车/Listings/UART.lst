@@ -1,0 +1,72 @@
+C51 COMPILER V9.54   UART                                                                  04/14/2022 14:42:25 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN .\Objects\UART.obj
+COMPILER INVOKED BY: D:\robot\51\keil\C51\BIN\C51.EXE UART.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\UART.lst) OBJECT(.\Objects\UART.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          
+   3          /**
+   4            * @brief  串口初始化，4800bps@12.000MHz
+   5            * @param  无
+   6            * @retval 无
+   7            */
+   8          void Uart_Init(void)            //9600bps@11.0592MHz
+   9          {
+  10   1              PCON &= 0x7F;           //波特率不倍速
+  11   1              SCON = 0x50;            //8位数据,可变波特率
+  12   1              TMOD &= 0x0F;           //设置定时器模式
+  13   1              TMOD |= 0x20;           //设置定时器模式
+  14   1              TL1 = 0xFD;             //设置定时初始值
+  15   1              TH1 = 0xFD;             //设置定时重载值
+  16   1              ET1 = 0;                //禁止定时器%d中断
+  17   1              TR1 = 1;                //定时器1开始计时
+  18   1              EA=1;
+  19   1              ES=1;
+  20   1      
+  21   1      }
+  22          
+  23          
+  24          
+  25          /**
+  26            * @brief  串口发送一个字节数据
+  27            * @param  Byte 要发送的一个字节数据
+  28            * @retval 无
+  29            */
+  30          void UART_SendByte(unsigned char Byte)
+  31          {
+  32   1              SBUF=Byte;
+  33   1              while(TI==0);
+  34   1              TI=0;
+  35   1      }
+  36          
+  37          /*串口中断函数模板
+  38          void UART_Routine() interrupt 4
+  39          {
+  40                  if(RI==1)
+  41                  {
+  42                          
+  43                          RI=0;
+  44                  }
+  45          }
+  46          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     35    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+C51 COMPILER V9.54   UART                                                                  04/14/2022 14:42:25 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

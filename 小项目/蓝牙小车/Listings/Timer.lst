@@ -1,0 +1,113 @@
+C51 COMPILER V9.54   TIMER                                                                 04/14/2022 14:42:25 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN .\Objects\Timer.obj
+COMPILER INVOKED BY: D:\robot\51\keil\C51\BIN\C51.EXE Timer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\Timer.lst) OBJECT(.\Objects\Timer.obj)
+
+line level    source
+
+   1          /*
+   2          for timer
+   3          */
+   4          #include <REGX52.H>
+   5          
+   6          void Timer0Init(void)           //11.0592MHz
+   7          {
+   8   1              //AUXR &= 0x7F;         
+   9   1              TMOD &= 0xF0;           
+  10   1              TMOD |= 0x01;           
+  11   1              TL0 = 0x66;             
+  12   1              TH0 = 0xFC;             
+  13   1              TF0 = 0;                
+  14   1              TR0 = 1;
+  15   1              //Below is start work
+  16   1              ET0 = 1;
+  17   1              EA = 1;
+  18   1              //PT0 = 0;      
+  19   1      }
+  20          
+  21          void Timer1Init(void)           //11.0592MHz
+  22          {
+  23   1              //AUXR &= 0xBF;         
+  24   1              TMOD &= 0x0F;           
+  25   1              TMOD |= 0x10;           
+  26   1              TL1 = 0x66;             
+  27   1              TH1 = 0xFC;             
+  28   1              TF1 = 0;                
+  29   1              TR1 = 1;        
+  30   1              //Below is start work
+  31   1              ET1 = 1;
+  32   1              EA = 1;
+  33   1              //PT1 = 1;
+  34   1      }
+  35          
+  36          void Timer2Init(void)           //@11.0592MHz
+  37          {
+  38   1              T2MOD = 0;      
+  39   1              T2CON = 0;      
+  40   1              TL2 = 0x66;     
+  41   1              TH2 = 0xFC;     
+  42   1              RCAP2L = 0x66;  
+  43   1              RCAP2H = 0xFC;  
+  44   1              TR2 = 1;        
+  45   1              //Below is start work
+  46   1              ET2 = 1;
+  47   1              EA = 1;
+  48   1              //PT1 = 1;      
+  49   1      }
+  50          
+  51          /*
+  52          void Timer0_Routine() interrupt 1
+  53          {
+  54                  static unsigned int T0Count;
+C51 COMPILER V9.54   TIMER                                                                 04/14/2022 14:42:25 PAGE 2   
+
+  55                  TL0 = 0x66;             
+  56                  TH0 = 0xFC;     
+  57                  T0Count++;
+  58                  if(T0Count >= 50)//50ms
+  59                  {
+  60                          P2_0 = ~P2_0;
+  61                          T0Count=0;
+  62                  }
+  63          }
+  64          */
+  65          
+  66          
+  67          /*
+  68          void Timer0_Init()
+  69          {
+  70                  //TMOD = 0x01;
+  71                  TMOD &= 0xF0; //only change the lower 4 places
+  72                  TMOD |= TMOD|0x01; //change the last digit
+  73                  TF0 = 0;
+  74                  TR0 = 1;
+  75                  //frequency = 11.059MHz
+  76                  TH0 = 64448/256;
+  77                  TL0 = 64448%256;  //Assign to two 8-bit registers
+  78                  /*
+  79                  Similar to: 123 to 1 and 23 two boxs
+  80                  (each box can only hold 0 to 99)
+  81                  here is the 16-bit register, so using the 2^8 = 256
+  82                  //
+  83                  ET0 = 1;
+  84                  EA = 1;
+  85                  PT0 = 0;
+  86          }
+  87          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     66    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
