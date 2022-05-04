@@ -68,13 +68,13 @@ class Test():
 
 
 
-app = Test()
-#print(app.result)
-
-
-del app  #删除实例化对象
-a = result   #'D:\\robot\job\FindBall\output.avi'
-cap = cv2.VideoCapture(result)  #读取视频文件
+# app = Test()
+# #print(app.result)
+#
+#
+# del app  #删除实例化对象
+# a = result   #'D:\\robot\job\FindBall\output.avi'
+cap = cv2.VideoCapture('output.avi')  #读取视频文件
 
 
 Str = 'Lower: 0 0 0 \n Upper: 0 0 0'  #用于保存阈值的字符串
