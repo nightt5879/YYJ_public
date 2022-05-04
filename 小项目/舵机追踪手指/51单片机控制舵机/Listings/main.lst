@@ -1,0 +1,197 @@
+C51 COMPILER V9.54   MAIN                                                                  04/07/2022 17:31:38 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\robot\51\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\main.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Delay.h"
+   3          #include "UART.h"
+   4          
+   5          //on the bottom is logic level
+   6          sbit IN1 = P2^0;
+   7          sbit IN2 = P2^1;
+   8          sbit IN3 = P2^2;
+   9          sbit IN4 = P2^3;
+  10          //on the bottom is PWM
+  11          sbit PWM1=P2^4;
+  12          sbit PWM2=P2^5;
+  13          int time;
+  14          int x,y;
+  15          int Xmax,Xmin,Ymax,Ymin;
+  16          //on the bottom is infrared
+  17          sbit Input_l = P2^6;
+  18          sbit Input_r = P2^7;
+  19          
+  20          void Delay1ms()         //@11.0592MHz
+  21          {
+  22   1              unsigned char i, j;
+  23   1      
+  24   1              //_nop_();
+  25   1              i = 2;
+  26   1              j = 199;
+  27   1              do
+  28   1              {
+  29   2                      while (--j);
+  30   2              } while (--i);
+  31   1      }
+  32          
+  33          
+  34          
+  35          
+  36          void main()
+  37          {
+  38   1              UART_Init();            //串口初始化
+  39   1              //defining timers
+  40   1              //TMOD=0x01;
+  41   1              TH0=0xff;
+  42   1              TL0=0xf7;
+  43   1              EA=1;
+  44   1              ET0=1;
+  45   1              TR0=1;
+  46   1              IN1 = 0;
+  47   1              //init engine
+  48   1              x = 21;
+  49   1              y =6;
+  50   1              Xmax = 37;
+  51   1              Xmin = 6;
+  52   1              Ymax = 20;
+  53   1              Ymin = 6;
+  54   1              time = 0;
+C51 COMPILER V9.54   MAIN                                                                  04/07/2022 17:31:38 PAGE 2   
+
+  55   1              while(1)
+  56   1              {
+  57   2                      if(RI==1)                                       //如果接收标志位为1，接收到了数据
+  58   2                      {                       
+  59   3                              //UART_SendByte(SBUF);          
+  60   3                              if(SBUF == 0xE1){
+  61   4                                      if(x>Xmin)x--;
+  62   4                                      if(y<Ymax) y++;
+  63   4                                      UART_SendByte(SBUF);
+  64   4                              }
+  65   3                              else if(SBUF == 0xE2){
+  66   4                                      x=x;
+  67   4                                      if(y<Ymax)y++;
+  68   4                              }
+  69   3                              else if(SBUF == 0xE3){
+  70   4                                      if(x<Xmax)x++;
+  71   4                                      if(y<Ymax)y++;
+  72   4                              }
+  73   3                              else if(SBUF == 0xE4){
+  74   4                                      if(x>Xmin)x--;
+  75   4                                      y=y;
+  76   4                              }
+  77   3                              else if(SBUF == 0xE5){
+  78   4                                      x=x;
+  79   4                                      y=y;
+  80   4                              }
+  81   3                              else if(SBUF == 0xE6){
+  82   4                                      if(x<Xmax)x++;
+  83   4                                      y=y;
+  84   4                              }
+  85   3                              else if(SBUF == 0xE7){
+  86   4                                      if(x>Xmin)x--;
+  87   4                                      if(y>Ymin)y--;
+  88   4                              }
+  89   3                              else if(SBUF == 0xE8){
+  90   4                                      x=x;
+  91   4                                      if(y>Ymin)y--;
+  92   4                              }
+  93   3                              else if(SBUF == 0xE9){
+  94   4                                      if(x<Xmax)x++;
+  95   4                                      if(y>Ymin)y--;
+  96   4                              }
+  97   3                              RI=0;                                   //接收标志位清0
+  98   3              }
+  99   2                      
+ 100   2              }
+ 101   1      }
+ 102          /*
+ 103          void UART_Routine() interrupt 4 
+ 104          {
+ 105                  if(RI==1)                                       //如果接收标志位为1，接收到了数据
+ 106                  {                       
+ 107                          //UART_SendByte(SBUF);          
+ 108                          if(SBUF == 0xE1){
+ 109                                  if(x<37)x++;
+ 110                                  if(y<20) y++;
+ 111                                  UART_SendByte(SBUF);
+ 112                          }
+ 113                          else if(SBUF == 0xE2){
+ 114                                  x=x;
+ 115                                  if(y<20)y++;
+ 116                          }
+C51 COMPILER V9.54   MAIN                                                                  04/07/2022 17:31:38 PAGE 3   
+
+ 117                          else if(SBUF == 0xE3){
+ 118                                  if(x>6)x--;
+ 119                                  if(y<20)y++;
+ 120                          }
+ 121                          else if(SBUF == 0xE4){
+ 122                                  if(x<37)x--;
+ 123                                  y=y;
+ 124                          }
+ 125                          else if(SBUF == 0xE5){
+ 126                                  x=x;
+ 127                                  y=y;
+ 128                          }
+ 129                          else if(SBUF == 0xE6){
+ 130                                  if(x>6)x--;
+ 131                                  y=y;
+ 132                          }
+ 133                          else if(SBUF == 0xE7){
+ 134                                  if(x<37)x++;
+ 135                                  if(y>6)y--;
+ 136                          }
+ 137                          else if(SBUF == 0xE8){
+ 138                                  x=x;
+ 139                                  if(y>6)y--;
+ 140                          }
+ 141                          else if(SBUF == 0xE9){
+ 142                                  if(x>6)x--;
+ 143                                  if(y>6)y--;
+ 144                          }
+ 145                          RI=0;                                   //接收标志位清0
+ 146                  }
+ 147          }
+ 148          */
+ 149          
+ 150          
+ 151          //time interrupt for PWM
+ 152          void tim0() interrupt 1
+ 153          {
+ 154   1              TR0=0;  
+ 155   1              TH0=0xff;       
+ 156   1              TL0=0xf7;       //0.01ms
+ 157   1              TR0=1;          
+ 158   1              time++;
+ 159   1              if(time>=300) time=0;   //you can change time to change PWM
+ 160   1              if(time<=x) PWM1= 1;            //20 is to 1ms
+ 161   1              else PWM1 = 0;
+ 162   1              if(time<=y) PWM2 = 1;
+ 163   1              else PWM2 = 0;
+ 164   1      }
+ 165          
+ 166          
+ 167          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    572    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.54   MAIN                                                                  04/07/2022 17:31:38 PAGE 4   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
