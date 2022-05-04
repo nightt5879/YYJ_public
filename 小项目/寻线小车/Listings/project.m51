@@ -1,0 +1,135 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/09/2022  15:11:12  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\ROBOT\51\KEIL\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\project PRINT (.\Listings\project.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  D:\ROBOT\51\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\project (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0055H     UNIT         ?PR?MAIN?MAIN
+            CODE    0063H     0043H     UNIT         ?PR?TIM0?MAIN
+            CODE    00A6H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\project (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\project (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  B:00A0H.4       PUBLIC        PWM1
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/09/2022  15:11:12  PAGE 2
+
+
+  C:000EH         PUBLIC        main
+  B:00A0H.5       PUBLIC        PWM2
+  D:0008H         PUBLIC        time
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:00A0H.0       PUBLIC        IN1
+  B:00A0H.1       PUBLIC        IN2
+  B:00A8H.1       PUBLIC        ET0
+  B:00A0H.2       PUBLIC        IN3
+  B:00A0H.3       PUBLIC        IN4
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  B:00A0H.6       PUBLIC        Input_l
+  B:00A0H.7       PUBLIC        Input_r
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  C:0063H         PUBLIC        tim0
+  -------         PROC          MAIN
+  C:000EH         LINE#         37
+  C:000EH         LINE#         38
+  C:000EH         LINE#         40
+  C:0011H         LINE#         41
+  C:0014H         LINE#         42
+  C:0017H         LINE#         43
+  C:0019H         LINE#         44
+  C:001BH         LINE#         45
+  C:001DH         LINE#         47
+  C:0021H         LINE#         48
+  C:0025H         LINE#         50
+  C:0025H         LINE#         51
+  C:0025H         LINE#         52
+  C:002BH         LINE#         53
+  C:002BH         LINE#         54
+  C:002FH         LINE#         55
+  C:0033H         LINE#         56
+  C:0035H         LINE#         57
+  C:003DH         LINE#         58
+  C:003DH         LINE#         59
+  C:0043H         LINE#         60
+  C:0045H         LINE#         61
+  C:0047H         LINE#         62
+  C:004FH         LINE#         63
+  C:004FH         LINE#         64
+  C:0055H         LINE#         65
+  C:0057H         LINE#         66
+  C:0059H         LINE#         68
+  C:0059H         LINE#         69
+  C:0061H         LINE#         70
+  C:0061H         LINE#         71
+  -------         ENDPROC       MAIN
+  -------         PROC          TIM0
+  C:0063H         LINE#         78
+  C:0067H         LINE#         80
+  C:0069H         LINE#         81
+  C:006CH         LINE#         82
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/09/2022  15:11:12  PAGE 3
+
+
+  C:006FH         LINE#         83
+  C:0071H         LINE#         84
+  C:0079H         LINE#         85
+  C:008AH         LINE#         86
+  C:009DH         LINE#         87
+  C:00A1H         LINE#         88
+  -------         ENDPROC       TIM0
+  -------         ENDMOD        MAIN
+
+Program Size: data=11.0 xdata=0 code=170
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
